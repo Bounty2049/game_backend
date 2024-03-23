@@ -1,4 +1,4 @@
-# game_backend
+# Backend app for game Truth or Lie
 
 # Installation
 
@@ -14,4 +14,4 @@
 
 --> py/python3 manage.py runserver
 
---> open http://127.0.0.1:8000/ url  in your browser
+--> open http://127.0.0.1:8000/ url in your browser
