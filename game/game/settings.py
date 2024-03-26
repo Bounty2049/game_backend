@@ -42,7 +42,9 @@ INSTALLED_APPS = [
     'users',
 
     'rest_framework',
-    'corsheaders'
+    'corsheaders',
+    'djoser',
+    'rest_framework_simplejwt'
 ]
 
 MIDDLEWARE = [
@@ -130,3 +132,23 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 AUTH_USER_MODEL = 'users.User'
+
+# Для аунтефикации по JWT токенам
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
+}
+
+# LIFETIME токенов и настройки для заголовка Authorization в запросах
+SIMPLE_JWT = {
+    # 'ACCESS_TOKEN_LIFETIME': '',
+    # 'REFRESH_TOKEN_LIFETIME': '',
+    'AUTH_HEADER_TYPES': ('Bearer',)
+}
+
+DJOSER = {
+    'LOGIN_FIELD': 'username',
+    'TOKEN_MODEL': None,
+
+}
