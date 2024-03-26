@@ -6,5 +6,5 @@ app_name = 'questions'
 
 
 urlpatterns = [
-    path('api/list/', views.QuestionViewSet.as_view(), name='list')
+    path('api/', views.QuestionViewSet.as_view(), name='api')
 ]
