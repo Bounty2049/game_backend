@@ -1,5 +1,3 @@
-from django.shortcuts import render
-
 from rest_framework import generics, status
 from rest_framework.permissions import AllowAny, IsAdminUser
 from rest_framework.response import Response
@@ -10,6 +8,9 @@ from .models import Question
 
 
 class QuestionViewSet(generics.ListCreateAPIView):
+    '''
+    Простотр и создание новых вопросов, доступ для создания вопросов имеют только админы (is_stuff)
+    '''
     queryset = Question.objects.all()
     serializer_class = QuestionSerializer
     permission_classes = [AllowAny]
