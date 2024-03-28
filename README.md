@@ -6,11 +6,23 @@
 
 --> py/python3 -m venv .venv
 
+--> source .venv/bin/activate (Linux/maxOS)
+
+--> .venv\Scripts\activate (Windows)
+
 --> pip install -r requirements.txt
 
-# Run 
+# Settings
 
 --> cd game
+
+--> py/python3 manage.py makemigrations
+
+--> py/python3 manage.py migrate
+
+--> py/python3 manage.py loaddata ./questions/fixtures/questions.json
+
+# Run 
 
 --> py/python3 manage.py runserver
 
