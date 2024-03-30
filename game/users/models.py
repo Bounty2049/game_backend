@@ -1,14 +1,11 @@
-from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 
-class User(AbstractUser):
-    phone = models.CharField(max_length=30, blank=False, null=False)
-    email = models.EmailField(unique=True, blank=False, null=False)
-    username = models.CharField(max_length=100, unique=False)
+class Guest(models.Model):
+    name = models.CharField(max_length=30)
+    email = models.EmailField(max_length=30)
+    phone = models.CharField(max_length=20)
 
-    REQUIRED_FIELDS = ['phone', 'username']
-    USERNAME_FIELD = 'email'
 
     def __str__(self):
-        return self.username
+        return self.name

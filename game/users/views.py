@@ -1,21 +1,25 @@
-from django.contrib.auth import authenticate
-
-from rest_framework.views import APIView
+from rest_framework import generics, status
 from rest_framework.response import Response
-from rest_framework.decorators import api_view, permission_classes
 
-from rest_framework_simplejwt.tokens import RefreshToken
-
-from .serializers import UserSerializer
-from .models import User
+from .serializers import GuestSerializer
+from .models import Guest
 
 
-class UserView(APIView):
-    '''
-    Для админов, чтобы просматривать пользователей, которые вообще есть
-    '''
+class GuestView(generics.ListCreateAPIView):
 
-    def get(self, request):
-        user = User.objects.all()
-        serializer = UserSerializer(user, many=True)
-        return Response({'users': serializer.data})
+    queryset = Guest.objects.all()
+    serializer_class = GuestSerializer
+
+    def list(self, request):
+        queryset = self.get_queryset()
+        serializer = GuestSerializer(queryset, many=True)
+
+        return Response(serializer.data)
+    
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
