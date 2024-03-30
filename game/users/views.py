@@ -36,18 +36,15 @@ class ExportToExcel(views.APIView):
     def get(self, request):
         queryset = Guest.objects.all().values()
 
-        # Create a new Excel workbook and add a worksheet
         response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
         response['Content-Disposition'] = 'attachment; filename="data.xlsx"'
         workbook = xlsxwriter.Workbook(response)
         worksheet = workbook.add_worksheet()
 
-        # Write header row
-        header_row = ['name', 'email', 'phone']  # Replace with actual field names
+        header_row = ['Имя', 'Почта', 'Телефон']  
         for col_num, field_name in enumerate(header_row):
             worksheet.write(0, col_num, field_name)
 
-        # Write data rows
         for row_num, row_data in enumerate(queryset, start=1):
             for col_num, field_name in enumerate(header_row):
                 worksheet.write(row_num, col_num, row_data.get(field_name, ''))
@@ -64,10 +61,9 @@ class ExportToCSV(views.APIView):
         response['Content-Disposition'] = 'attachment; filename="data.csv"'
 
         writer = csv.writer(response)
-        # Write header row
-        writer.writerow(['Имя', 'Почта', 'Телефон'])  # Replace 'Field1', 'Field2', ... with actual field names
+        writer.writerow(['Имя', 'Почта', 'Телефон'])  
 
         for item in queryset:
-            writer.writerow([item['name'], item['email'], item['phone']])  # Replace 'field1', 'field2', ... with actual field names
+            writer.writerow([item['name'], item['email'], item['phone']]) 
 
         return response
