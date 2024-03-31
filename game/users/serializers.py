@@ -5,4 +5,4 @@ from users.models import Guest
 class GuestSerializer(serializers.ModelSerializer):
     class Meta:
         model = Guest
-        fields = ('name', 'email', 'phone')
+        fields = '__all__'
