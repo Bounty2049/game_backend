@@ -3,8 +3,8 @@ from rest_framework.permissions import AllowAny, IsAdminUser
 from rest_framework.response import Response
 
 
-from .serializers import QuestionSerializer
-from .models import Question
+from .serializers import QuestionSerializer, QuestionUsedSerializer
+from .models import Question, QuestionUsed
 
 
 class QuestionViewSet(generics.ListCreateAPIView):
@@ -35,4 +35,25 @@ class QuestionViewSet(generics.ListCreateAPIView):
 class QuesetionRetrieve(generics.RetrieveAPIView):
     queryset = Question.objects.all()
     serializer_class = QuestionSerializer
+
+
+
+class QuestionUsedView(generics.ListCreateAPIView):
+    queryset = QuestionUsed.objects.all()
+    serializer_class = QuestionUsedSerializer
+    permission_classes = [AllowAny]
     
+
+    def list(self, request):
+        queryset = QuestionUsed.objects.all()
+        serializer = QuestionUsedSerializer(queryset, many=True)
+
+        return Response(serializer.data)
+    
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)        

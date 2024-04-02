@@ -10,3 +10,7 @@ class Question(models.Model):
 
     def __str__(self):
         return self.title
+    
+
+class QuestionUsed(models.Model):
+    question_id = models.IntegerField()
