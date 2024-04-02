@@ -4,7 +4,7 @@ from django.db import models
 class Question(models.Model):
     title = models.CharField(max_length=128)
     question = models.TextField()
-    image = models.ImageField(upload_to='questions/', default=None, null=True)
+    image = models.URLField(blank=True)
     is_true = models.BooleanField()
 
 
