@@ -4,6 +4,8 @@
 
 --> https://github.com/Bounty2049/game_backend.git
 
+--> cd game_backend
+
 --> py/python3 -m venv .venv
 
 --> source .venv/bin/activate (Linux/maxOS)
