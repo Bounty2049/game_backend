@@ -12,6 +12,10 @@ from .models import Guest
 
 
 class GuestView(generics.ListCreateAPIView):
+    '''
+    Get запрос отдает json объект со всеми пользователями(гостями), прошедшими регистрацию.
+    Post запрос регистрирует нового пользователя(гостя).
+    '''
 
     queryset = Guest.objects.all()
     serializer_class = GuestSerializer
@@ -32,7 +36,10 @@ class GuestView(generics.ListCreateAPIView):
     
 
 class ExportToExcel(views.APIView):
-
+    '''
+    Для скачивания данных о прошедших регистрацию пользователях в формате excel.
+    Для реализации использовалась библиотека xlsxwriter
+    '''
     def get(self, request):
         queryset = Guest.objects.all().values()
 
@@ -54,6 +61,10 @@ class ExportToExcel(views.APIView):
     
 
 class ExportToCSV(views.APIView):
+    '''
+    Для скачивания данных о прошедших регистрацию пользователях в формате csc.
+    Для реализации использовалась встроенная библиотека csv
+    '''
     def get(self, request):
         queryset = Guest.objects.all().values()
 

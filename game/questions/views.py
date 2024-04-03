@@ -9,7 +9,7 @@ from .models import Question, QuestionUsed
 
 class QuestionViewSet(generics.ListCreateAPIView):
     '''
-    Простотр и создание новых вопросов, доступ для создания вопросов имеют только админы (is_stuff)
+    Простотр и создание новых вопросов
     '''
     queryset = Question.objects.all()
     serializer_class = QuestionSerializer
@@ -33,12 +33,17 @@ class QuestionViewSet(generics.ListCreateAPIView):
 
 
 class QuesetionRetrieve(generics.RetrieveAPIView):
+    '''Получить данные конкретного вопроса по id'''
     queryset = Question.objects.all()
     serializer_class = QuestionSerializer
 
 
 
 class QuestionUsedView(generics.ListCreateAPIView):
+    '''
+    Дает возможность фронту считывать те вопросы которые уже были, 
+    а так же их количество
+    '''
     queryset = QuestionUsed.objects.all()
     serializer_class = QuestionUsedSerializer
     permission_classes = [AllowAny]
