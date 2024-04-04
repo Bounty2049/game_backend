@@ -32,7 +32,7 @@ class QuestionViewSet(generics.ListCreateAPIView):
     
 
 
-class QuesetionRetrieve(generics.RetrieveAPIView):
+class QuesetionRetrieve(generics.RetrieveUpdateDestroyAPIView):
     '''Получить данные конкретного вопроса по id'''
     queryset = Question.objects.all()
     serializer_class = QuestionSerializer
