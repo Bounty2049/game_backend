@@ -42,7 +42,10 @@ class QuesetionRetrieve(generics.RetrieveAPIView):
 class QuestionUsedView(generics.ListCreateAPIView):
     '''
     Дает возможность фронту считывать те вопросы которые уже были, 
-    а так же их количество
+    а так же их количество. 
+    Примечание:
+        данная реализация позволяет сыграть в игру только 3 раза, поскольку потом
+        БД переполняется и фронт делая запрос падает в бесконечный цикл
     '''
     queryset = QuestionUsed.objects.all()
     serializer_class = QuestionUsedSerializer
